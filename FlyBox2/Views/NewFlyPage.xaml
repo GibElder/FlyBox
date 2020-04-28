@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" x:Class="FlyBox2.Views.NewFlyPage" Title="New Fly">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
+        <ToolbarItem Text="Save" Clicked="Save_Clicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="Name" FontSize="Medium" />
+            <Entry Text="{Binding fly.FlyName}" FontSize="Small" />
+            <Label Text="Color" FontSize="Medium" />
+            <Entry Text="{Binding fly.Color}"  FontSize="Small" />
+            <Label Text="Description" FontSize="Medium" />
+            <Editor Text="{Binding fly.Description}" FontSize="Small" Margin="0" TextColor="#CB0C0C" />
+
+            <RelativeLayout HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
+                <Button Text="Dry" RelativeLayout.XConstraint="{ConstraintExpression 
+                        Type=RelativeToParent,Property=Width,Factor=.0000,Constant=0}"
+                        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                        Property=Width,Factor=.3333,Constant=0}" Clicked="DisplayDry"/>
+                <Button Text="Nymph" RelativeLayout.XConstraint="{ConstraintExpression
+                        Type=RelativeToParent,Property=Width,Factor=.3333,Constant=0}"
+                        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                        Property=Width,Factor=.3333,Constant=0}" Clicked="DisplayNymph"/>
+                <Button Text="Streamer" RelativeLayout.XConstraint="{ConstraintExpression
+                        Type=RelativeToParent,Property=Width,Factor=.6666,Constant=0}"
+                        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
+                        Property=Width,Factor=.3333,Constant=0}" Clicked="DisplayStreamer"/>
+            </RelativeLayout>
+
+
+            <StackLayout x:Name="Dry" IsVisible="False">
+                <Label Text="Dry is being displayed"/>
+            </StackLayout>
+
+
+            <StackLayout x:Name="Nymph" IsVisible="False">
+                <Label Text="Nymph is being displayed"/>
+            </StackLayout>
+
+
+            <StackLayout x:Name="Streamer" IsVisible="False">
+                <Label Text="Streamer is being displayed"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+  
+</ContentPage>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" x:Class="FlyBox2.Views.CatchDetailPage" Title="{Binding FishType}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Edit" Clicked="Edit_Clicked" />
+        <ToolbarItem Text="Delete" Clicked="Delete_Clicked" />
+    </ContentPage.ToolbarItems>
+    <StackLayout Spacing="20" Padding="15">
+        <Label Text="Fish Type:" FontSize="Medium" />
+        <Label Text="{Binding Catch.FishType}"  FontSize="Small" />
+        <Label Text="Size (in):" FontSize="Medium" />
+        <Label Text="{Binding Catch.Size}" FontSize="Small" />
+        <Label Text="Location:" FontSize="Medium" />
+        <Label Text="{Binding Catch.Location}" FontSize="Small" />
+        <Label Text="Fly Used:" FontSize="Medium" />
+        <Label Text="{Binding Catch.Fly.FlyName}" FontSize="Small" />
+        <Label Text="Description:" FontSize="Medium" />
+        <Label Text="{Binding Catch.Description}" FontSize="Small" />
+    </StackLayout>
+</ContentPage>

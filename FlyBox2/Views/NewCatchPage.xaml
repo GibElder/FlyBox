@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" x:Class="FlyBox2.Views.NewCatchPage" Title="New Catch">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
+        <ToolbarItem Text="Save" Clicked="Save_Clicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="Fish Type" FontSize="Medium" />
+            <Entry Text="{Binding Catch.FishType}" FontSize="Small" />
+            <Label Text="Size" FontSize="Medium" />
+            <Entry Text="{Binding Catch.Size}" FontSize="Small" />
+            <Label Text="Location" FontSize="Medium" />
+            <Entry Text="{Binding Catch.Location}" FontSize="Small" />
+            <Label Text="Fly" FontSize="Medium"/>
+           <Picker                           
+            ItemsSource="{Binding FlyList}"
+            ItemDisplayBinding="{Binding FlyName}"
+            SelectedItem="{Binding Catch.Fly, Mode=TwoWay}"  
+            Title="Select a Fly"
+            FontSize="Medium"
+            VerticalOptions="Center"
+            HorizontalOptions="FillAndExpand"
+            />
+            <Label Text="Description" FontSize="Medium" />
+            <Editor Text="{Binding Catch.Description}" FontSize="Small" Margin="0" TextColor="#CB0C0C" />
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
