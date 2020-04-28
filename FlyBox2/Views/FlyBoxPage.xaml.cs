@@ -9,7 +9,6 @@ using Xamarin.Forms.Xaml;
 
 using FlyBox2.Models;
 using FlyBox2.Views;
-using FlyBox2.ViewModels;
 using System.Collections.ObjectModel;
 
 namespace FlyBox2.Views

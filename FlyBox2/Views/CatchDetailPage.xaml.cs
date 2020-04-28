@@ -4,7 +4,6 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using FlyBox2.Models;
-using FlyBox2.ViewModels;
 
 namespace FlyBox2.Views
 {

@@ -1,7 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using FlyBox2.Services;
 using FlyBox2.Views;
 
 namespace FlyBox2
@@ -13,7 +12,6 @@ namespace FlyBox2
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
 
