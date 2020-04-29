@@ -12,7 +12,7 @@ namespace FlyBox2.Models
 
         public ICollection<Catch> Catches { get; set; }
 
-        public void Assign(Fly OtherFly)
+        public virtual void Assign(Fly OtherFly)
         {
             this.FlyID = OtherFly.FlyID;
             this.FlyName = OtherFly.FlyName;

@@ -1,5 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="FlyBox2.Views.FlyDetailPage" Title="{Binding FlyName}">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" x:Class="FlyBox2.Views.FlyDetailPage" Title="{Binding FlyName}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Edit" Clicked="Edit_Clicked" />
         <ToolbarItem Text="Delete" Clicked="Delete_Clicked" />
@@ -7,7 +11,29 @@
     <StackLayout Spacing="20" Padding="15">
         <Label Text="Name:" FontSize="Medium" />
         <Label Text="{Binding Fly.FlyName}"  FontSize="Small" />
+        <Label Text="Color:" FontSize="Medium" />
+        <Label Text="{Binding Fly.Color}" FontSize="Small" />
         <Label Text="Description:" FontSize="Medium" />
         <Label Text="{Binding Fly.Description}" FontSize="Small" />
+
+        <StackLayout Spacing="20" x:Name="Dry1" IsVisible="false">
+            <Label Text="Hook Size:" FontSize="Medium" />
+            <Label Text="{Binding Dry.HookSize}" FontSize="Small" />
+        </StackLayout>
+
+        <StackLayout Spacing="20" x:Name="Nymph1" IsVisible="false">
+            <Label Text="Hook Size:" FontSize="Medium" />
+            <Label Text="{Binding Nymph.HookSize}" FontSize="Small" />
+            <Label Text="Weight:" FontSize="Medium" />
+            <Label Text="{Binding Nymph.Weight}" FontSize="Small" />
+        </StackLayout>
+
+        <StackLayout Spacing="20" x:Name="Streamer1" IsVisible="false" >
+            <Label Text="Length:" FontSize="Medium" />
+            <Label Text="{Binding Streamer.Length}" FontSize="Small" />
+            <Label Text="Water Column:" FontSize="Medium" />
+            <Label Text="{Binding Streamer.WaterColumn}" FontSize="Small" />
+        </StackLayout>
+
     </StackLayout>
 </ContentPage>

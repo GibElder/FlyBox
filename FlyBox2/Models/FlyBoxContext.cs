@@ -37,6 +37,11 @@ namespace FlyBox2.Models
 
         public DbSet<Fly> Fly { get; set; }
         public DbSet<Catch> Catch { get; set; }
+        public DbSet<Dry> Dry { get; set; }
+        public DbSet<Nymph> Nymph { get; set; }
+        public DbSet<Streamer> Streamer { get; set; }
+
+
 
 
 

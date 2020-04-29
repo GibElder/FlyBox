@@ -12,11 +12,11 @@
     <ContentPage.Content>
         <StackLayout Spacing="20" Padding="15">
             <Label Text="Name" FontSize="Medium" />
-            <Entry Text="{Binding fly.FlyName}" FontSize="Small" />
+            <Entry Text="{Binding Fly.FlyName}" FontSize="Small" />
             <Label Text="Color" FontSize="Medium" />
-            <Entry Text="{Binding fly.Color}"  FontSize="Small" />
+            <Entry Text="{Binding Fly.Color}"  FontSize="Small" />
             <Label Text="Description" FontSize="Medium" />
-            <Editor Text="{Binding fly.Description}" FontSize="Small" Margin="0" TextColor="#CB0C0C" />
+            <Editor Text="{Binding Fly.Description}" FontSize="Small" Margin="0" TextColor="#CB0C0C" />
 
             <RelativeLayout HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
                 <Button x:Name="BtDry" Text="Dry" RelativeLayout.XConstraint="{ConstraintExpression 
@@ -34,13 +34,13 @@
             </RelativeLayout>
 
 
-            <StackLayout x:Name="Dry" IsVisible="False">
+            <StackLayout x:Name="Dry1" IsVisible="False">
                 <Label Text="Hook Size" FontSize="Medium" />
                 <Entry Text="{Binding Dry.HookSize}" FontSize="Small" />
             </StackLayout>
 
 
-            <StackLayout x:Name="Nymph" IsVisible="False">
+            <StackLayout x:Name="Nymph1" IsVisible="False">
                 <Label Text="Hook Size" FontSize="Medium" />
                 <Entry Text="{Binding Nymph.HookSize}" FontSize="Small" />
                 <Label Text="Weight" FontSize="Medium" />
@@ -48,7 +48,7 @@
             </StackLayout>
 
 
-            <StackLayout x:Name="Streamer" IsVisible="False">
+            <StackLayout x:Name="Streamer1" IsVisible="False">
                 <Label Text="Length" FontSize="Medium" />
                 <Entry Text="{Binding Streamer.Length}" FontSize="Small" />
                 <Label Text="Water Column" FontSize="Medium" />

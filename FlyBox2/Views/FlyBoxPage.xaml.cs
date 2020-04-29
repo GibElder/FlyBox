@@ -10,6 +10,7 @@ using Xamarin.Forms.Xaml;
 using FlyBox2.Models;
 using FlyBox2.Views;
 using System.Collections.ObjectModel;
+using Microsoft.EntityFrameworkCore;
 
 namespace FlyBox2.Views
 {
@@ -44,8 +45,7 @@ namespace FlyBox2.Views
         {
             base.OnAppearing();
             var context = new FlyBoxcontext();
-            var list = context.Fly.ToList();
-
+            var list = context.Fly.Include(o => o.Catches).ToList();
             if (list.Count == 0)
             {
                 var newfly = new Fly();
@@ -65,7 +65,7 @@ namespace FlyBox2.Views
 
                 context.SaveChanges();
 
-                list = context.Fly.ToList();
+                list = context.Fly.Include(o => o.Catches).ToList();
             }
 
             Flies = new ObservableCollection<Fly>(list);

@@ -14,40 +14,66 @@ namespace FlyBox2.Views
     public partial class NewFlyPage : ContentPage
     {
         private bool isEdit;
-        public Fly fly { get; set; }
+        private Fly fly;
+        private Nymph nymph;
+        private Dry dry;
+        private Streamer streamer;
+
+        public Fly Fly { get => fly; set { fly = value; OnPropertyChanged("Fly"); } }
+
+        public Nymph Nymph { get => nymph; set { nymph = value; OnPropertyChanged("Nymph"); } }
+
+        public Dry Dry { get => dry; set { dry = value; OnPropertyChanged("Dry"); } }
+
+        public Streamer Streamer { get => streamer; set { streamer = value; OnPropertyChanged("Streamer"); } }
+
         private Fly OriginalFLy { get; set; }
 
 
         public NewFlyPage(Fly fly)
         {
             isEdit = true;
-            this.fly = fly;
+            this.Fly = fly;
             OriginalFLy = new Fly();
             OriginalFLy.Assign(fly);
             InitializeComponent();
             BindingContext = this;
+
+            if (fly is Dry)
+            {
+                DisplayDry(null, null);
+            }
+            else if ( Fly is Nymph)
+            {
+                DisplayNymph(null, null);
+            }
+            else if (fly is Streamer)
+            {
+                DisplayStreamer(null, null);
+            }
+
         }
 
         public NewFlyPage()
         {
             isEdit = false;
-            fly = new Fly();
+            Fly = new Fly();
             InitializeComponent();
-            fly.FlyID = Guid.NewGuid().ToString();
+            Fly.FlyID = Guid.NewGuid().ToString();
             BindingContext = this;
         }
 
         async void Save_Clicked(object sender, EventArgs e)
         {
             using var context = new FlyBoxcontext();
-            if ( isEdit == false)
+            if (isEdit == false)
             {
-                context.Fly.Add(fly);
+                context.Fly.Add(Fly);
                 context.SaveChanges();
             }
             else
             {
-                context.Fly.Update(fly);
+                context.Fly.Update(Fly);
                 context.SaveChanges();
             }
             await Navigation.PopModalAsync();
@@ -59,7 +85,7 @@ namespace FlyBox2.Views
                 await Navigation.PopModalAsync();
             else
             {
-                fly.Assign(OriginalFLy);
+                Fly.Assign(OriginalFLy);
                 await Navigation.PopModalAsync();
 
             }
@@ -68,32 +94,56 @@ namespace FlyBox2.Views
 
         public void DisplayDry(object sender, EventArgs e)
         {
-            Dry.IsVisible = true;
-            Nymph.IsVisible = false;
-            Streamer.IsVisible = false;
+            Dry1.IsVisible = true;
+            Nymph1.IsVisible = false;
+            Streamer1.IsVisible = false;
             BtDry.TextColor = Color.Black;
             BtNymph.TextColor = Color.Blue;
             BtStreamer.TextColor = Color.Blue;
+
+            var tmpdry = new Dry();
+            tmpdry.Assign(Fly);
+            Fly = tmpdry;
+            Dry = tmpdry;
+            Nymph = null;
+            Streamer = null;
+
         }
 
         public void DisplayNymph(object sender, EventArgs e)
         {
-            Dry.IsVisible = false;
-            Nymph.IsVisible = true;
-            Streamer.IsVisible = false;
+            Dry1.IsVisible = false;
+            Nymph1.IsVisible = true;
+            Streamer1.IsVisible = false;
             BtDry.TextColor = Color.Blue;
             BtNymph.TextColor = Color.Black;
             BtStreamer.TextColor = Color.Blue;
+
+
+            var tmpnymph = new Nymph();
+            tmpnymph.Assign(Fly);
+            Fly = tmpnymph;
+            Dry = null;
+            Nymph = tmpnymph;
+            Streamer = null;
         }
 
         public void DisplayStreamer(object sender, EventArgs e)
         {
-            Dry.IsVisible = false;
-            Nymph.IsVisible = false;
-            Streamer.IsVisible = true;
+            Dry1.IsVisible = false;
+            Nymph1.IsVisible = false;
+            Streamer1.IsVisible = true;
             BtDry.TextColor = Color.Blue;
             BtNymph.TextColor = Color.Blue;
             BtStreamer.TextColor = Color.Black;
+
+
+            var tmpstreamer = new Streamer();
+            tmpstreamer.Assign(Fly);
+            Fly = tmpstreamer;
+            Dry = null;
+            Nymph = null;
+            Streamer = tmpstreamer;
         }
 
     }

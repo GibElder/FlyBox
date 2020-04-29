@@ -12,13 +12,45 @@ namespace FlyBox2.Views
     [DesignTimeVisible(false)]
     public partial class FlyDetailPage : ContentPage
     {
-        public Fly Fly { get; set; }
+        private Fly fly;
+        private Nymph nymph;
+        private Dry dry;
+        private Streamer streamer;
+
+        public Fly Fly { get => fly; set { fly = value; OnPropertyChanged("Fly"); } }
+
+        public Nymph Nymph { get => nymph; set { nymph = value; OnPropertyChanged("Nymph"); } }
+
+        public Dry Dry { get => dry; set { dry = value; OnPropertyChanged("Dry"); } }
+
+        public Streamer Streamer { get => streamer; set { streamer = value; OnPropertyChanged("Streamer"); } }
 
         public FlyDetailPage(Fly fly)
         {
             InitializeComponent();
             this.Fly = fly;
             BindingContext = this;
+
+            if (fly is Dry)
+            {
+                Dry = fly as Dry;
+                Dry1.IsVisible = true;
+                Nymph1.IsVisible = false;
+                Streamer1.IsVisible = false;
+            }
+            else if (fly is Nymph)
+            {
+                Dry1.IsVisible = false;
+                Nymph1.IsVisible = true;
+                Streamer1.IsVisible = false;
+            }
+            else if (fly is Streamer)
+            {
+                Dry1.IsVisible = false;
+                Nymph1.IsVisible = false;
+                Streamer1.IsVisible = true;
+            }
+
         }
 
         async void Edit_Clicked(object sender, EventArgs e)
@@ -29,10 +61,19 @@ namespace FlyBox2.Views
 
         async void Delete_Clicked(object sender, EventArgs e)
         {
-            using var context = new FlyBoxcontext();
-            context.Fly.Remove(Fly);
-            await context.SaveChangesAsync();
-            await Navigation.PopAsync();
+            if ( fly.Catches?.Count > 0 )
+            {
+                await DisplayAlert("Alert", "This fly has caught fish you can't delete it!", "OK");
+
+            }
+            else
+            {
+                using var context = new FlyBoxcontext();
+                context.Fly.Remove(Fly);
+                await context.SaveChangesAsync();
+                await Navigation.PopAsync();
+
+            }
 
         }
 
