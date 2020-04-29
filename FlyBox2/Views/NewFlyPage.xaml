@@ -19,15 +19,15 @@
             <Editor Text="{Binding fly.Description}" FontSize="Small" Margin="0" TextColor="#CB0C0C" />
 
             <RelativeLayout HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
-                <Button Text="Dry" RelativeLayout.XConstraint="{ConstraintExpression 
+                <Button x:Name="BtDry" Text="Dry" RelativeLayout.XConstraint="{ConstraintExpression 
                         Type=RelativeToParent,Property=Width,Factor=.0000,Constant=0}"
                         RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
                         Property=Width,Factor=.3333,Constant=0}" Clicked="DisplayDry"/>
-                <Button Text="Nymph" RelativeLayout.XConstraint="{ConstraintExpression
+                <Button x:Name="BtNymph" Text="Nymph" RelativeLayout.XConstraint="{ConstraintExpression
                         Type=RelativeToParent,Property=Width,Factor=.3333,Constant=0}"
                         RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
                         Property=Width,Factor=.3333,Constant=0}" Clicked="DisplayNymph"/>
-                <Button Text="Streamer" RelativeLayout.XConstraint="{ConstraintExpression
+                <Button x:Name="BtStreamer" Text="Streamer" RelativeLayout.XConstraint="{ConstraintExpression
                         Type=RelativeToParent,Property=Width,Factor=.6666,Constant=0}"
                         RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
                         Property=Width,Factor=.3333,Constant=0}" Clicked="DisplayStreamer"/>
@@ -35,17 +35,24 @@
 
 
             <StackLayout x:Name="Dry" IsVisible="False">
-                <Label Text="Dry is being displayed"/>
+                <Label Text="Hook Size" FontSize="Medium" />
+                <Entry Text="{Binding Dry.HookSize}" FontSize="Small" />
             </StackLayout>
 
 
             <StackLayout x:Name="Nymph" IsVisible="False">
-                <Label Text="Nymph is being displayed"/>
+                <Label Text="Hook Size" FontSize="Medium" />
+                <Entry Text="{Binding Nymph.HookSize}" FontSize="Small" />
+                <Label Text="Weight" FontSize="Medium" />
+                <Entry Text="{Binding Nymph.Weight}" FontSize="Small" />
             </StackLayout>
 
 
             <StackLayout x:Name="Streamer" IsVisible="False">
-                <Label Text="Streamer is being displayed"/>
+                <Label Text="Length" FontSize="Medium" />
+                <Entry Text="{Binding Streamer.Length}" FontSize="Small" />
+                <Label Text="Water Column" FontSize="Medium" />
+                <Entry Text="{Binding Streamer.WaterColumn}" FontSize="Small" />
             </StackLayout>
 
         </StackLayout>

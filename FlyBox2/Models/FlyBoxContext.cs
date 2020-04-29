@@ -8,7 +8,7 @@ namespace FlyBox2.Models
     public class FlyBoxcontext : DbContext
     {
 
-        private const string databaseName = "FlyBox.db3";
+        private const string databaseName = "FlyBox2.db3";
 
         public FlyBoxcontext()
         {

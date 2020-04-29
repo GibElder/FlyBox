@@ -17,20 +17,26 @@ namespace FlyBox2.Views
     public partial class NewCatchPage : ContentPage
     {
         private bool isEdit;
+        private Fly selectedFly;
+
         public Catch Catch { get; set; }
         private Catch OriginalCatch { get; set; }
         public ObservableCollection<Fly> FlyList { get; set; }
-        //public Fly SelectedFLy { get; set; }
-
+        public Fly SelectedFly { get => selectedFly; set { selectedFly = value; OnPropertyChanged("SelectedFly"); } }
 
         public NewCatchPage(Catch Catch)
         {
             isEdit = true;
+
+            InitializeComponent();
+            InitPicker();
+
             this.Catch = Catch;
+            SelectedFly = FlyList.SingleOrDefault(f => f.FlyID == Catch.Fly?.FlyID);
+
             OriginalCatch = new Catch();
             OriginalCatch.Assign(Catch);
-            InitPicker();
-            InitializeComponent();
+
             BindingContext = this;
         }
 
@@ -45,7 +51,7 @@ namespace FlyBox2.Views
         }
 
 
-        private void  InitPicker ()
+        private void InitPicker()
         {
             using var context = new FlyBoxcontext();
             FlyList = new ObservableCollection<Fly>(context.Fly.ToList());
@@ -54,9 +60,15 @@ namespace FlyBox2.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
-            Catch.FlyID = Catch.Fly?.FlyID;
+            Catch.FlyID = SelectedFly?.FlyID;
             using var context = new FlyBoxcontext();
-            if ( isEdit == false)
+
+            if (SelectedFly?.FlyID != null)
+            {
+                Catch.Fly = context.Fly.Where(f => f.FlyID == Catch.FlyID).SingleOrDefault();
+            }
+
+            if (isEdit == false)
             {
                 context.Catch.Add(Catch);
                 context.SaveChanges();
@@ -79,6 +91,6 @@ namespace FlyBox2.Views
                 await Navigation.PopModalAsync();
 
             }
-        }   
+        }
     }
 }

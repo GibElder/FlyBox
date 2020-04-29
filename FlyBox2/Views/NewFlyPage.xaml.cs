@@ -71,6 +71,9 @@ namespace FlyBox2.Views
             Dry.IsVisible = true;
             Nymph.IsVisible = false;
             Streamer.IsVisible = false;
+            BtDry.TextColor = Color.Black;
+            BtNymph.TextColor = Color.Blue;
+            BtStreamer.TextColor = Color.Blue;
         }
 
         public void DisplayNymph(object sender, EventArgs e)
@@ -78,6 +81,9 @@ namespace FlyBox2.Views
             Dry.IsVisible = false;
             Nymph.IsVisible = true;
             Streamer.IsVisible = false;
+            BtDry.TextColor = Color.Blue;
+            BtNymph.TextColor = Color.Black;
+            BtStreamer.TextColor = Color.Blue;
         }
 
         public void DisplayStreamer(object sender, EventArgs e)
@@ -85,6 +91,9 @@ namespace FlyBox2.Views
             Dry.IsVisible = false;
             Nymph.IsVisible = false;
             Streamer.IsVisible = true;
+            BtDry.TextColor = Color.Blue;
+            BtNymph.TextColor = Color.Blue;
+            BtStreamer.TextColor = Color.Black;
         }
 
     }

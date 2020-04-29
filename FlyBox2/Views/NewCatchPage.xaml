@@ -21,7 +21,7 @@
            <Picker                           
             ItemsSource="{Binding FlyList}"
             ItemDisplayBinding="{Binding FlyName}"
-            SelectedItem="{Binding Catch.Fly, Mode=TwoWay}"  
+            SelectedItem="{Binding SelectedFly, Mode=TwoWay}"  
             Title="Select a Fly"
             FontSize="Medium"
             VerticalOptions="Center"
