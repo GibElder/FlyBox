@@ -70,7 +70,12 @@ namespace FlyBox2.Views
             {
                 Catch.Fly = context.Fly.Where(f => f.FlyID == Catch.FlyID).SingleOrDefault();
             }
-
+            if(Catch.Size <= 0) {
+                
+                await DisplayAlert("Error", "Catch must be greater than zero!", "OK");
+                return;
+                
+            }
             if (isEdit == false)
             {
                 context.Catch.Add(Catch);
