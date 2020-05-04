@@ -70,11 +70,34 @@ namespace FlyBox2.Views
             {
                 Catch.Fly = context.Fly.Where(f => f.FlyID == Catch.FlyID).SingleOrDefault();
             }
-            if(Catch.Size <= 0) {
+            // check if fish type is set
+            if (string.IsNullOrEmpty(Catch.FishType))
+            {
+                await DisplayAlert("Error", "You must enter a type of fish!", "OK");
+                return;
+            }
+
+            // Make sure catch size > 0
+            if (Catch.Size <= 0) {
                 
                 await DisplayAlert("Error", "Catch must be greater than zero!", "OK");
                 return;
                 
+            }
+            // Check if fly is specified
+            if (Catch.Fly == null)
+            {
+                await DisplayAlert("Error", "You must choose a fly.", "OK");
+                return;
+            }
+
+            // Check if location was specified
+            if (string.IsNullOrEmpty(Catch.Location))
+            {
+                bool answer = await DisplayAlert("Location", "Save catch without location?", "Yes", "No");
+                if(answer) {
+                    return;
+                }
             }
             if (isEdit == false)
             {

@@ -29,6 +29,11 @@ namespace FlyBox2.Views
 
         async void Delete_Clicked(object sender, EventArgs e)
         {
+            bool delete = await DisplayAlert("Delete Catch", "Are you sure you want to delete this catch?", "Yes", "No");
+            if(!delete)
+            {
+                return;
+            }
             using var context = new FlyBoxcontext();
             context.Catch.Remove(Catch);
             await context.SaveChangesAsync();
