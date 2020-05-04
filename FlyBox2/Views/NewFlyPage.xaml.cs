@@ -68,6 +68,31 @@ namespace FlyBox2.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
+            // Make sure fly name isn't empty 
+            if(string.IsNullOrEmpty(Fly.FlyName))
+            {
+                await DisplayAlert("Error", "Fly name cannot be empty!", "OK");
+                return;
+            }
+            // Make sure fly name is less than 30 characters
+            if (Fly.FlyName.Length > 30)
+            {
+                await DisplayAlert("Error", "Fly name must be less than 30 characters!", "OK");
+                return;
+            }
+
+            // Make sure fly color is specified
+            if (string.IsNullOrEmpty(Fly.Color))
+            {
+                await DisplayAlert("Error", "Fly color must be specified!", "OK");
+                return;
+            }
+            // Make sure fly description is less than 240 characters
+            if(Fly.Description != null && Fly.Description.Length > 240)
+            {
+                await DisplayAlert("Error", "Fly description must be less than 240 characters!", "OK");
+                return;
+            }
             using var context = new FlyBoxcontext();
             if (isEdit == false)
             {

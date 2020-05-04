@@ -91,6 +91,14 @@ namespace FlyBox2.Views
                 return;
             }
 
+            // Check that if description is set, that its less than 240 characters
+            if (Catch.Description != null && Catch.Description.Length > 240)
+            {
+                await DisplayAlert("Error", "Catch description must be less than 240 characters!", "OK");
+                return;
+            }
+
+
             // Check if location was specified
             if (string.IsNullOrEmpty(Catch.Location))
             {
@@ -99,6 +107,7 @@ namespace FlyBox2.Views
                     return;
                 }
             }
+           
             if (isEdit == false)
             {
                 context.Catch.Add(Catch);

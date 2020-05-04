@@ -16,7 +16,7 @@
             <Label Text="Color" FontSize="Medium" />
             <Entry Text="{Binding Fly.Color}"  FontSize="Small" />
             <Label Text="Description" FontSize="Medium" />
-            <Editor Text="{Binding Fly.Description}" FontSize="Small" Margin="0" TextColor="#F7F9FA" />
+            <Editor Text="{Binding Fly.Description}" FontSize="Small" Margin="0" TextColor="Black" />
 
             <RelativeLayout HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
                 <Button x:Name="BtDry" Text="Dry" RelativeLayout.XConstraint="{ConstraintExpression 
