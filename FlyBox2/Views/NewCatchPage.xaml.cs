@@ -33,6 +33,7 @@ namespace FlyBox2.Views
 
             this.Catch = Catch;
             SelectedFly = FlyList.SingleOrDefault(f => f.FlyID == Catch.Fly?.FlyID);
+            BackgroundColor = Color.FromHex("E7A16E");
 
             OriginalCatch = new Catch();
             OriginalCatch.Assign(Catch);
@@ -43,6 +44,8 @@ namespace FlyBox2.Views
         public NewCatchPage()
         {
             isEdit = false;
+            BackgroundColor = Color.FromHex("E7A16E");
+
             Catch = new Catch();
             InitPicker();
             InitializeComponent();

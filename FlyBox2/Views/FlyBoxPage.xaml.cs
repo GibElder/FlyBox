@@ -38,7 +38,11 @@ namespace FlyBox2.Views
 
         async void AddItem_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new NavigationPage(new NewFlyPage()));
+
+            await Navigation.PushModalAsync(new NavigationPage(new NewFlyPage()
+            {
+                BackgroundColor = Color.FromHex("E7A16E")
+            }));
         }
 
         protected override void OnAppearing()
@@ -60,6 +64,7 @@ namespace FlyBox2.Views
                 newfly.FlyID = "2";
                 newfly.FlyName = "TestFly";
                 newfly.Color = "Blue";
+                newfly.Description = "This fly is blue and catches tons of fish!";
 
                 context.Fly.Add(newfly);
 

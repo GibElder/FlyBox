@@ -19,6 +19,7 @@ namespace FlyBox2.Views
         private Dry dry;
         private Streamer streamer;
 
+        private Xamarin.Forms.Color textColor = Color.FromHex("E9E9E9");
         public Fly Fly { get => fly; set { fly = value; OnPropertyChanged("Fly"); } }
 
         public Nymph Nymph { get => nymph; set { nymph = value; OnPropertyChanged("Nymph"); } }
@@ -33,6 +34,7 @@ namespace FlyBox2.Views
         public NewFlyPage(Fly fly)
         {
             isEdit = true;
+            BackgroundColor = Color.FromHex("E7A16E");
             this.Fly = fly;
             OriginalFLy = new Fly();
             OriginalFLy.Assign(fly);
@@ -56,6 +58,7 @@ namespace FlyBox2.Views
 
         public NewFlyPage()
         {
+            BackgroundColor = Color.FromHex("E7A16E");
             isEdit = false;
             Fly = new Fly();
             InitializeComponent();
@@ -98,8 +101,8 @@ namespace FlyBox2.Views
             Nymph1.IsVisible = false;
             Streamer1.IsVisible = false;
             BtDry.TextColor = Color.Black;
-            BtNymph.TextColor = Color.Blue;
-            BtStreamer.TextColor = Color.Blue;
+            BtNymph.TextColor = textColor;
+            BtStreamer.TextColor = textColor;
 
             var tmpdry = new Dry();
             tmpdry.Assign(Fly);
@@ -115,9 +118,9 @@ namespace FlyBox2.Views
             Dry1.IsVisible = false;
             Nymph1.IsVisible = true;
             Streamer1.IsVisible = false;
-            BtDry.TextColor = Color.Blue;
+            BtDry.TextColor = textColor;
             BtNymph.TextColor = Color.Black;
-            BtStreamer.TextColor = Color.Blue;
+            BtStreamer.TextColor = textColor;
 
 
             var tmpnymph = new Nymph();
@@ -133,8 +136,8 @@ namespace FlyBox2.Views
             Dry1.IsVisible = false;
             Nymph1.IsVisible = false;
             Streamer1.IsVisible = true;
-            BtDry.TextColor = Color.Blue;
-            BtNymph.TextColor = Color.Blue;
+            BtDry.TextColor = textColor;
+            BtNymph.TextColor = textColor;
             BtStreamer.TextColor = Color.Black;
 
 
