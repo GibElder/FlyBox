@@ -52,7 +52,7 @@ namespace FlyBox2.Views
                 newfly.FlyID = "1";
                 newfly.FlyName = "Wolly Bugger";
                 newfly.Color = "Brown";
-                newfly.Description = "This is a good discription";
+                newfly.Description = "This is a good description";
 
                 context.Fly.Add(newfly);
 
