@@ -58,7 +58,7 @@ namespace FlyBox2.Views
 
                 newfly = new Fly();
                 newfly.FlyID = "2";
-                newfly.FlyName = "Test";
+                newfly.FlyName = "TestFly";
                 newfly.Color = "Blue";
 
                 context.Fly.Add(newfly);
