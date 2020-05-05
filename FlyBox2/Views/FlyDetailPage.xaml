@@ -15,7 +15,6 @@
         <Label Text="{Binding Fly.Color}" FontSize="Small" />
         <Label Text="Number of Catches:" FontSize="Medium" />
         <Label Text="{Binding Fly.CatchNumbers}" FontSize="Small" />
-
         <Label Text="Description:" FontSize="Medium" />
         <Label Text="{Binding Fly.Description}" FontSize="Small" />
 
