@@ -23,6 +23,8 @@ namespace FlyBox2.Views
 
         public ObservableCollection<Fly> Flies { get => flies; set { flies = value; OnPropertyChanged("Flies"); } }
 
+        public string SearchText;
+
         public FlyBoxPage()
         {
             InitializeComponent();
@@ -69,6 +71,20 @@ namespace FlyBox2.Views
             }
 
             Flies = new ObservableCollection<Fly>(list);
+
         }
+
+
+        public void DoSearch()
+        {
+
+            var context = new FlyBoxcontext();
+
+
+
+             
+
+        }
+
     }
 }

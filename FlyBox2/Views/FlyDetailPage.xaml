@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" x:Class="FlyBox2.Views.FlyDetailPage" Title="{Binding FlyName}">
+             mc:Ignorable="d" x:Class="FlyBox2.Views.FlyDetailPage" Title="{Binding Fly.FlyName}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Edit" Clicked="Edit_Clicked" />
         <ToolbarItem Text="Delete" Clicked="Delete_Clicked" />
     </ContentPage.ToolbarItems>
+
     <StackLayout Spacing="20" Padding="15">
         <Label Text="Name:" FontSize="Medium" />
         <Label Text="{Binding Fly.FlyName}"  FontSize="Small" />

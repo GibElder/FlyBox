@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" x:Class="FlyBox2.Views.CatchesPage" Title="{Binding Title}" x:Name="BrowseCatchesPage">
+             mc:Ignorable="d" x:Class="FlyBox2.Views.CatchesPage" Title="Catches" x:Name="BrowseCatchesPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
     </ContentPage.ToolbarItems>

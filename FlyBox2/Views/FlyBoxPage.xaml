@@ -3,29 +3,46 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" x:Class="FlyBox2.Views.FlyBoxPage" Title="{Binding Title}" x:Name="BrowseFlyPage">
+             mc:Ignorable="d" x:Class="FlyBox2.Views.FlyBoxPage" Title="Fly Box" x:Name="BrowseFlyPage">
+   
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
     </ContentPage.ToolbarItems>
+    <StackLayout>
+
+        <SearchBar Placeholder="Search items..."
+           CancelButtonColor="Black"
+           PlaceholderColor="Black"
+           TextColor="Black"
+           HorizontalTextAlignment="Center"
+           FontSize="Medium"
+           FontAttributes="Italic"
+           SearchCommand="{Binding DoSearch}"
+           SearchCommandParameter="{Binding SearchText, Source={x:Reference searchBar}}"
+           />
+
     <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
         <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding Flies}">
-          
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Padding="10">
+
+                    <StackLayout Padding="10" >
+
+
                         <Label Text="{Binding FlyName}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
-                        <Label Text="{Binding Description}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" />
+                        <Label Text="{Binding Description}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13"  />
                         
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected">
                             </TapGestureRecognizer>
                         </StackLayout.GestureRecognizers>
-       
                     </StackLayout>
+                    
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
     </RefreshView>
+    </StackLayout>
 </ContentPage>
 
 
