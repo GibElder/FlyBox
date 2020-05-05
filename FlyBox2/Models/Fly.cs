@@ -11,7 +11,13 @@ namespace FlyBox2.Models
         public string Color { get; set; }
 
         public ICollection<Catch> Catches { get; set; }
-
+        public int CatchNumbers
+        {
+            get
+            {
+                return Catches.Count;
+            }
+        }
         public virtual void Assign(Fly OtherFly)
         {
             this.FlyID = OtherFly.FlyID;
