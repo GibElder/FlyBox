@@ -28,7 +28,7 @@ namespace FlyBox2.Views
 
         public Streamer Streamer { get => streamer; set { streamer = value; OnPropertyChanged("Streamer"); } }
 
-        private Fly OriginalFLy { get; set; }
+        private Fly OriginalFly { get; set; }
 
 
         public NewFlyPage(Fly fly)
@@ -36,8 +36,8 @@ namespace FlyBox2.Views
             isEdit = true;
             BackgroundColor = Color.FromHex("E7A16E");
             this.Fly = fly;
-            OriginalFLy = new Fly();
-            OriginalFLy.Assign(fly);
+            OriginalFly = new Fly();
+            OriginalFly.Assign(fly);
             InitializeComponent();
             BindingContext = this;
 
@@ -113,7 +113,7 @@ namespace FlyBox2.Views
                 await Navigation.PopModalAsync();
             else
             {
-                Fly.Assign(OriginalFLy);
+                Fly.Assign(OriginalFly);
                 await Navigation.PopModalAsync();
 
             }
