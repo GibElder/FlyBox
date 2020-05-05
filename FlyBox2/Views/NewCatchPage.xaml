@@ -28,7 +28,7 @@
             HorizontalOptions="FillAndExpand"
             />
             <Label Text="Description" FontSize="Medium" />
-            <Editor Text="{Binding Catch.Description}" FontSize="Small" Margin="0" TextColor="#CB0C0C" />
+            <Editor Text="{Binding Catch.Description}" FontSize="Small" Margin="0" TextColor="Black" />
 
 
         </StackLayout>

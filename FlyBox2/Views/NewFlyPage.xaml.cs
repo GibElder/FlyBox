@@ -19,6 +19,7 @@ namespace FlyBox2.Views
         private Dry dry;
         private Streamer streamer;
 
+        private Xamarin.Forms.Color textColor = Color.FromHex("E9E9E9");
         public Fly Fly { get => fly; set { fly = value; OnPropertyChanged("Fly"); } }
 
         public Nymph Nymph { get => nymph; set { nymph = value; OnPropertyChanged("Nymph"); } }
@@ -27,15 +28,16 @@ namespace FlyBox2.Views
 
         public Streamer Streamer { get => streamer; set { streamer = value; OnPropertyChanged("Streamer"); } }
 
-        private Fly OriginalFLy { get; set; }
+        private Fly OriginalFly { get; set; }
 
 
         public NewFlyPage(Fly fly)
         {
             isEdit = true;
+            BackgroundColor = Color.FromHex("E7A16E");
             this.Fly = fly;
-            OriginalFLy = new Fly();
-            OriginalFLy.Assign(fly);
+            OriginalFly = new Fly();
+            OriginalFly.Assign(fly);
             InitializeComponent();
             BindingContext = this;
 
@@ -56,6 +58,7 @@ namespace FlyBox2.Views
 
         public NewFlyPage()
         {
+            BackgroundColor = Color.FromHex("E7A16E");
             isEdit = false;
             Fly = new Fly();
             InitializeComponent();
@@ -65,6 +68,31 @@ namespace FlyBox2.Views
 
         async void Save_Clicked(object sender, EventArgs e)
         {
+            // Make sure fly name isn't empty 
+            if(string.IsNullOrEmpty(Fly.FlyName))
+            {
+                await DisplayAlert("Error", "Fly name cannot be empty!", "OK");
+                return;
+            }
+            // Make sure fly name is less than 30 characters
+            if (Fly.FlyName.Length > 30)
+            {
+                await DisplayAlert("Error", "Fly name must be less than 30 characters!", "OK");
+                return;
+            }
+
+            // Make sure fly color is specified
+            if (string.IsNullOrEmpty(Fly.Color))
+            {
+                await DisplayAlert("Error", "Fly color must be specified!", "OK");
+                return;
+            }
+            // Make sure fly description is less than 240 characters
+            if(Fly.Description != null && Fly.Description.Length > 240)
+            {
+                await DisplayAlert("Error", "Fly description must be less than 240 characters!", "OK");
+                return;
+            }
             using var context = new FlyBoxcontext();
             if (isEdit == false)
             {
@@ -85,7 +113,7 @@ namespace FlyBox2.Views
                 await Navigation.PopModalAsync();
             else
             {
-                Fly.Assign(OriginalFLy);
+                Fly.Assign(OriginalFly);
                 await Navigation.PopModalAsync();
 
             }
@@ -98,8 +126,8 @@ namespace FlyBox2.Views
             Nymph1.IsVisible = false;
             Streamer1.IsVisible = false;
             BtDry.TextColor = Color.Black;
-            BtNymph.TextColor = Color.Blue;
-            BtStreamer.TextColor = Color.Blue;
+            BtNymph.TextColor = textColor;
+            BtStreamer.TextColor = textColor;
 
             var tmpdry = new Dry();
             tmpdry.Assign(Fly);
@@ -115,9 +143,9 @@ namespace FlyBox2.Views
             Dry1.IsVisible = false;
             Nymph1.IsVisible = true;
             Streamer1.IsVisible = false;
-            BtDry.TextColor = Color.Blue;
+            BtDry.TextColor = textColor;
             BtNymph.TextColor = Color.Black;
-            BtStreamer.TextColor = Color.Blue;
+            BtStreamer.TextColor = textColor;
 
 
             var tmpnymph = new Nymph();
@@ -133,8 +161,8 @@ namespace FlyBox2.Views
             Dry1.IsVisible = false;
             Nymph1.IsVisible = false;
             Streamer1.IsVisible = true;
-            BtDry.TextColor = Color.Blue;
-            BtNymph.TextColor = Color.Blue;
+            BtDry.TextColor = textColor;
+            BtNymph.TextColor = textColor;
             BtStreamer.TextColor = Color.Black;
 
 

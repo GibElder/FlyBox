@@ -33,6 +33,7 @@ namespace FlyBox2.Views
 
             this.Catch = Catch;
             SelectedFly = FlyList.SingleOrDefault(f => f.FlyID == Catch.Fly?.FlyID);
+            BackgroundColor = Color.FromHex("E7A16E");
 
             OriginalCatch = new Catch();
             OriginalCatch.Assign(Catch);
@@ -43,6 +44,8 @@ namespace FlyBox2.Views
         public NewCatchPage()
         {
             isEdit = false;
+            BackgroundColor = Color.FromHex("E7A16E");
+
             Catch = new Catch();
             InitPicker();
             InitializeComponent();
@@ -67,7 +70,44 @@ namespace FlyBox2.Views
             {
                 Catch.Fly = context.Fly.Where(f => f.FlyID == Catch.FlyID).SingleOrDefault();
             }
+            // check if fish type is set
+            if (string.IsNullOrEmpty(Catch.FishType))
+            {
+                await DisplayAlert("Error", "You must enter a type of fish!", "OK");
+                return;
+            }
 
+            // Make sure catch size > 0
+            if (Catch.Size <= 0) {
+                
+                await DisplayAlert("Error", "Catch must be greater than zero!", "OK");
+                return;
+                
+            }
+            // Check if fly is specified
+            if (Catch.Fly == null)
+            {
+                await DisplayAlert("Error", "You must choose a fly.", "OK");
+                return;
+            }
+
+            // Check that if description is set, that its less than 240 characters
+            if (Catch.Description != null && Catch.Description.Length > 240)
+            {
+                await DisplayAlert("Error", "Catch description must be less than 240 characters!", "OK");
+                return;
+            }
+
+
+            // Check if location was specified
+            if (string.IsNullOrEmpty(Catch.Location))
+            {
+                bool answer = await DisplayAlert("Location", "Save catch without location?", "Yes", "No");
+                if(answer) {
+                    return;
+                }
+            }
+           
             if (isEdit == false)
             {
                 context.Catch.Add(Catch);

@@ -68,6 +68,11 @@ namespace FlyBox2.Views
             }
             else
             {
+                bool delete = await DisplayAlert("Delete Fly", "Are you sure you want to delete this fly?", "Yes", "No");
+                if (!delete)
+                {
+                    return;
+                }
                 using var context = new FlyBoxcontext();
                 context.Fly.Remove(Fly);
                 await context.SaveChangesAsync();

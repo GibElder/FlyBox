@@ -46,7 +46,20 @@ namespace FlyBox2.Views
             base.OnAppearing();
             var context = new FlyBoxcontext();
             var list = context.Catch.Include(o => o.Fly).ToList();
+            if(list.Count == 0)
+            {
+                var newfish = new Catch();
+                newfish.CatchID = "1";
+                newfish.FishType = "Smallmouth Bass";
+                newfish.Location = "Secret River";
+                newfish.Description = "A very beautiful catch";
+                newfish.FlyID = "1";
+                newfish.Size = 10;
+                context.Catch.Add(newfish);
+                context.SaveChanges();
+                list = context.Catch.Include(o => o.Fly).ToList();
 
+            }
             Catches = new ObservableCollection<Catch>(list);
         }
     }
