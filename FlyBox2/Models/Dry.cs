@@ -7,9 +7,15 @@ namespace FlyBox2.Models
         public int HookSize { get; set; }
 
 
-        public virtual void Assign(Dry OtherFly)
+        public override void Assign(Fly OtherFly)
         {
-            this.HookSize = OtherFly.HookSize;
+            if ( OtherFly is Dry )
+            {
+                var dry = OtherFly as Dry;
+                this.HookSize = dry.HookSize;
+
+            }
+
             base.Assign(OtherFly);
         }
 

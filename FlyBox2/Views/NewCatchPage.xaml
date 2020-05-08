@@ -3,13 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" x:Class="FlyBox2.Views.NewCatchPage" Title="New Catch">
+             mc:Ignorable="d" x:Class="FlyBox2.Views.NewCatchPage" Title="{Binding title}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
         <ToolbarItem Text="Save" Clicked="Save_Clicked" />
     </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
+        <ScrollView>
         <StackLayout Spacing="20" Padding="15">
             <Label Text="Fish Type" FontSize="Medium" />
             <Entry Text="{Binding Catch.FishType}" FontSize="Small" />
@@ -28,9 +30,17 @@
             HorizontalOptions="FillAndExpand"
             />
             <Label Text="Description" FontSize="Medium" />
-            <Editor Text="{Binding Catch.Description}" FontSize="Small" Margin="0" TextColor="Black" />
+            <Editor Text="{Binding Catch.Description}" FontSize="Small" Margin="0" TextColor="#CB0C0C" />
 
+             <Button Text="Add Picture" Clicked="TakePicture"/>
+
+             <Image x:Name="image"
+                Source="{Binding Catch.ImagePath}"
+                HorizontalOptions="FillAndExpand"
+             />
 
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
+        
 </ContentPage>

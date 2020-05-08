@@ -8,6 +8,7 @@ using FlyBox2.Models;
 using System.Collections.ObjectModel;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Plugin.Media;
 
 namespace FlyBox2.Views
 {
@@ -17,6 +18,7 @@ namespace FlyBox2.Views
     public partial class NewCatchPage : ContentPage
     {
         private bool isEdit;
+        public string title { get; set; }
         private Fly selectedFly;
 
         public Catch Catch { get; set; }
@@ -27,13 +29,12 @@ namespace FlyBox2.Views
         public NewCatchPage(Catch Catch)
         {
             isEdit = true;
-
+            title = "Edit Catch";
             InitializeComponent();
             InitPicker();
 
             this.Catch = Catch;
             SelectedFly = FlyList.SingleOrDefault(f => f.FlyID == Catch.Fly?.FlyID);
-            BackgroundColor = Color.FromHex("E7A16E");
 
             OriginalCatch = new Catch();
             OriginalCatch.Assign(Catch);
@@ -44,8 +45,7 @@ namespace FlyBox2.Views
         public NewCatchPage()
         {
             isEdit = false;
-            BackgroundColor = Color.FromHex("E7A16E");
-
+            title = "New Catch";
             Catch = new Catch();
             InitPicker();
             InitializeComponent();
@@ -131,6 +131,38 @@ namespace FlyBox2.Views
                 await Navigation.PopModalAsync();
 
             }
+        }
+
+
+        public async void TakePicture(object sender, EventArgs e)
+        {
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await DisplayAlert("No Camera", ":( No camera available.", "OK");
+                return;
+            }
+
+            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            {
+                SaveToAlbum = true
+            }); ;
+
+            if (file == null)
+                return;
+
+            Catch.ImagePath = file.Path;
+
+            OnPropertyChanged("Catch.ImagePath");
+
+            image.Source = ImageSource.FromStream(() =>
+            {
+                var stream = file.GetStream();
+                return stream;
+            });
+
+
         }
     }
 }

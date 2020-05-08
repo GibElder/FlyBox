@@ -6,10 +6,14 @@ namespace FlyBox2.Models
         public int Length { get; set; }
         public string WaterColumn { get; set; }
 
-        public virtual void Assign(Streamer OtherFly)
+        public override void Assign(Fly OtherFly)
         {
-            this.Length = OtherFly.Length;
-            this.WaterColumn = OtherFly.WaterColumn;
+            if (OtherFly is Streamer)
+            {
+                var streamer = OtherFly as Streamer;
+                this.Length = streamer.Length;
+                this.WaterColumn = streamer.WaterColumn;
+            }
             base.Assign(OtherFly);
         }
 

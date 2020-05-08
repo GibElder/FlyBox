@@ -8,41 +8,43 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
     </ContentPage.ToolbarItems>
-    <StackLayout>
+  
+        
+        <CollectionView x:Name="ItemsCollectionView" SelectionMode="Single" ItemsSource="{Binding Flies}"
+                        SelectionChanged="OnItemSelected">
 
-        <SearchBar Placeholder="Search items..."
-           CancelButtonColor="Black"
-           PlaceholderColor="Black"
-           TextColor="Black"
-           HorizontalTextAlignment="Center"
-           FontSize="Medium"
-           FontAttributes="Italic"
-           SearchCommand="{Binding DoSearch}"
-           SearchCommandParameter="{Binding SearchText, Source={x:Reference searchBar}}"
-           />
-
-    <RefreshView IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-        <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding Flies}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-
-                    <StackLayout Padding="10" >
-
-
-                        <Label Text="{Binding FlyName}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
-                        <Label Text="{Binding Description}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13"  />
-                        
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="OnItemSelected">
-                            </TapGestureRecognizer>
-                        </StackLayout.GestureRecognizers>
-                    </StackLayout>
-                    
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
+           
+        <CollectionView.ItemTemplate >
+        <DataTemplate>
+            
+            <Grid Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Image Grid.RowSpan="2"
+                       Source="{Binding ImagePath}"
+                       Aspect="AspectFill"
+                       HeightRequest="60"
+                       WidthRequest="60" />
+                <Label Grid.Column="1"
+                       Text="{Binding FlyName}"
+                       FontAttributes="Bold" />
+                <Label Grid.Row="1"
+                       Grid.Column="1"
+                       Text="{Binding Description}"
+                       FontAttributes="Italic"
+                       VerticalOptions="End" />
+            </Grid>
+            
+        </DataTemplate>
+           </CollectionView.ItemTemplate>
         </CollectionView>
-    </RefreshView>
-    </StackLayout>
+      
 </ContentPage>
 
 

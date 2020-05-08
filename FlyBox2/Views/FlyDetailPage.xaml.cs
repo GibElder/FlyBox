@@ -17,7 +17,19 @@ namespace FlyBox2.Views
         private Dry dry;
         private Streamer streamer;
 
-        public Fly Fly { get => fly; set { fly = value; OnPropertyChanged("Fly"); } }
+        public Fly Fly { get => fly;
+            set
+            {
+                fly = value;
+
+                Nymph = null;
+                Dry = null;
+                Streamer = null;
+
+                ChangeFlyType();
+
+                OnPropertyChanged("Fly");
+            } }
 
         public Nymph Nymph { get => nymph; set { nymph = value; OnPropertyChanged("Nymph"); } }
 
@@ -30,7 +42,11 @@ namespace FlyBox2.Views
             InitializeComponent();
             this.Fly = fly;
             BindingContext = this;
+        }
 
+        private void ChangeFlyType()
+        {
+            
             if (fly is Dry)
             {
                 Dry = fly as Dry;
@@ -40,23 +56,24 @@ namespace FlyBox2.Views
             }
             else if (fly is Nymph)
             {
+                Nymph = fly as Nymph;
                 Dry1.IsVisible = false;
                 Nymph1.IsVisible = true;
                 Streamer1.IsVisible = false;
             }
             else if (fly is Streamer)
             {
+                Streamer = fly as Streamer;
                 Dry1.IsVisible = false;
                 Nymph1.IsVisible = false;
                 Streamer1.IsVisible = true;
             }
-
         }
 
         async void Edit_Clicked(object sender, EventArgs e)
         {
             var layout = (BindableObject)sender;
-            await Navigation.PushModalAsync(new NavigationPage(new NewFlyPage(Fly)));
+            await Navigation.PushModalAsync(new NavigationPage(new NewFlyPage(Fly, this)));
         }
 
         async void Delete_Clicked(object sender, EventArgs e)

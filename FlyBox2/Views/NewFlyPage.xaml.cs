@@ -5,6 +5,9 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 using FlyBox2.Models;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+using System.IO;
 
 namespace FlyBox2.Views
 {
@@ -13,13 +16,15 @@ namespace FlyBox2.Views
     [DesignTimeVisible(false)]
     public partial class NewFlyPage : ContentPage
     {
+        public string title { get; set; }
         private bool isEdit;
         private Fly fly;
         private Nymph nymph;
         private Dry dry;
         private Streamer streamer;
+        private FlyDetailPage parentPage;
 
-        private Xamarin.Forms.Color textColor = Color.FromHex("E9E9E9");
+        private Xamarin.Forms.Color textColor = Color.Blue;
         public Fly Fly { get => fly; set { fly = value; OnPropertyChanged("Fly"); } }
 
         public Nymph Nymph { get => nymph; set { nymph = value; OnPropertyChanged("Nymph"); } }
@@ -31,13 +36,14 @@ namespace FlyBox2.Views
         private Fly OriginalFly { get; set; }
 
 
-        public NewFlyPage(Fly fly)
+        public NewFlyPage(Fly fly, FlyDetailPage parentPage)
         {
+            title = "Edit Fly";
             isEdit = true;
-            BackgroundColor = Color.FromHex("E7A16E");
             this.Fly = fly;
             OriginalFly = new Fly();
             OriginalFly.Assign(fly);
+            this.parentPage = parentPage;
             InitializeComponent();
             BindingContext = this;
 
@@ -58,7 +64,7 @@ namespace FlyBox2.Views
 
         public NewFlyPage()
         {
-            BackgroundColor = Color.FromHex("E7A16E");
+            title = "New Fly";
             isEdit = false;
             Fly = new Fly();
             InitializeComponent();
@@ -104,16 +110,25 @@ namespace FlyBox2.Views
                 context.Fly.Update(Fly);
                 context.SaveChanges();
             }
+            if (parentPage != null)
+                parentPage.Fly = Fly;
             await Navigation.PopModalAsync();
         }
 
         async void Cancel_Clicked(object sender, EventArgs e)
         {
             if (isEdit == false)
+            {
+                //if (parentPage != null)
+                //    parentPage.Fly = Fly;
                 await Navigation.PopModalAsync();
+            }
             else
             {
                 Fly.Assign(OriginalFly);
+                if (parentPage != null)
+                    parentPage.Fly = Fly;
+
                 await Navigation.PopModalAsync();
 
             }
@@ -172,6 +187,40 @@ namespace FlyBox2.Views
             Dry = null;
             Nymph = null;
             Streamer = tmpstreamer;
+        }
+
+
+        public async void TakePicture(object sender, EventArgs e)
+        {
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await DisplayAlert("No Camera", ":( No camera available.", "OK");
+                return;
+            }
+
+            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+            {
+                //Directory = "Sample",
+                //Name = Fly.FlyID + ".jpg"
+                SaveToAlbum = true
+            }); ;
+
+            if (file == null)
+                return;
+
+            Fly.ImagePath = file.Path;
+
+            OnPropertyChanged("Fly.ImagePath");
+
+            image.Source = ImageSource.FromStream(() =>
+            {
+                var stream = file.GetStream();
+                return stream;
+            });
+
+
         }
 
     }

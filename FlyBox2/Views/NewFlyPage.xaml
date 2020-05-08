@@ -3,13 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" x:Class="FlyBox2.Views.NewFlyPage" Title="New Fly">
+             mc:Ignorable="d" x:Class="FlyBox2.Views.NewFlyPage" Title="{Binding title}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
         <ToolbarItem Text="Save" Clicked="Save_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
+        <ScrollView>
         <StackLayout Spacing="20" Padding="15">
             <Label Text="Name" FontSize="Medium" />
             <Entry Text="{Binding Fly.FlyName}" FontSize="Small" />
@@ -17,6 +18,7 @@
             <Entry Text="{Binding Fly.Color}"  FontSize="Small" />
             <Label Text="Description" FontSize="Medium" />
             <Editor Text="{Binding Fly.Description}" FontSize="Small" Margin="0" TextColor="Black" />
+
 
             <RelativeLayout HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
                 <Button x:Name="BtDry" Text="Dry" RelativeLayout.XConstraint="{ConstraintExpression 
@@ -55,7 +57,16 @@
                 <Entry Text="{Binding Streamer.WaterColumn}" FontSize="Small" />
             </StackLayout>
 
+
+            <Button Text="Add Picture" Clicked="TakePicture"/>
+
+             <Image x:Name="image"
+                Source="{Binding Fly.ImagePath}"
+                HorizontalOptions="FillAndExpand"
+             />
+
         </StackLayout>
+            </ScrollView>
     </ContentPage.Content>
   
 </ContentPage>

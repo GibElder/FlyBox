@@ -11,6 +11,7 @@ using FlyBox2.Models;
 using FlyBox2.Views;
 using System.Collections.ObjectModel;
 using Microsoft.EntityFrameworkCore;
+using System.Windows.Input;
 
 namespace FlyBox2.Views
 {
@@ -19,32 +20,31 @@ namespace FlyBox2.Views
     [DesignTimeVisible(false)]
     public partial class FlyBoxPage : ContentPage
     {
+
+
         private ObservableCollection<Fly> flies;
 
         public ObservableCollection<Fly> Flies { get => flies; set { flies = value; OnPropertyChanged("Flies"); } }
 
         public string SearchText;
 
+
         public FlyBoxPage()
-        {
+        { 
             InitializeComponent();
+
             BindingContext = this;
         }
 
-        async void OnItemSelected(object sender, EventArgs args)
+        async void OnItemSelected(object sender, SelectionChangedEventArgs args)
         {
-            var layout = (BindableObject)sender;
-            var fly = (Fly)layout.BindingContext;
-            await Navigation.PushAsync(new FlyDetailPage(fly));
+            await Navigation.PushAsync(new FlyDetailPage(args.CurrentSelection.FirstOrDefault() as Fly));
         }
 
         async void AddItem_Clicked(object sender, EventArgs e)
         {
 
-            await Navigation.PushModalAsync(new NavigationPage(new NewFlyPage()
-            {
-                BackgroundColor = Color.FromHex("E7A16E")
-            }));
+            await Navigation.PushModalAsync(new NavigationPage(new NewFlyPage()));
         }
 
         protected override void OnAppearing()
@@ -80,16 +80,7 @@ namespace FlyBox2.Views
         }
 
 
-        public void DoSearch()
-        {
-
-            var context = new FlyBoxcontext();
-
-
-
-             
-
-        }
+       
 
     }
 }

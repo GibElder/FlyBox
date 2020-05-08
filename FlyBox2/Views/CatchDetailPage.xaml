@@ -8,6 +8,7 @@
         <ToolbarItem Text="Edit" Clicked="Edit_Clicked" />
         <ToolbarItem Text="Delete" Clicked="Delete_Clicked" />
     </ContentPage.ToolbarItems>
+    <ScrollView>
     <StackLayout Spacing="20" Padding="15">
         <Label Text="Fish Type:" FontSize="Medium" />
         <Label Text="{Binding Catch.FishType}"  FontSize="Small" />
@@ -19,5 +20,9 @@
         <Label Text="{Binding Catch.Fly.FlyName}" FontSize="Small" />
         <Label Text="Description:" FontSize="Medium" />
         <Label Text="{Binding Catch.Description}" FontSize="Small" />
+        <Image BackgroundColor="Blue"             
+          Source="{Binding Catch.ImagePath}"
+          HorizontalOptions="FillAndExpand" />
     </StackLayout>
+    </ScrollView>
 </ContentPage>

@@ -10,6 +10,7 @@ namespace FlyBox2.Models
         public Fly Fly { get; set; }
         public string Description { get; set; }
         public double Size { get; set; }
+        public string ImagePath { get; set; }
 
 
         public void Assign(Catch OtherCatch)
@@ -18,6 +19,7 @@ namespace FlyBox2.Models
             this.FishType = OtherCatch.FishType;
             this.Description = OtherCatch.Description;
             this.Location = OtherCatch.Location;
+            this.ImagePath = OtherCatch.ImagePath;
             if (OtherCatch.Fly == null)
                 this.Fly = null;
             else

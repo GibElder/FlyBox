@@ -29,11 +29,9 @@ namespace FlyBox2.Views
             BindingContext = this;
         }
 
-        async void OnItemSelected(object sender, EventArgs args)
+        async void OnItemSelected(object sender, SelectionChangedEventArgs args)
         {
-            var layout = (BindableObject)sender;
-            var Catch = (Catch)layout.BindingContext;
-            await Navigation.PushAsync(new CatchDetailPage(Catch));
+            await Navigation.PushAsync(new CatchDetailPage(args.CurrentSelection.FirstOrDefault() as Catch));
         }
 
         async void AddItem_Clicked(object sender, EventArgs e)

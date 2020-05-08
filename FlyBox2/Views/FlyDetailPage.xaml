@@ -8,14 +8,12 @@
         <ToolbarItem Text="Edit" Clicked="Edit_Clicked" />
         <ToolbarItem Text="Delete" Clicked="Delete_Clicked" />
     </ContentPage.ToolbarItems>
-
+    <ScrollView>
     <StackLayout Spacing="20" Padding="15">
         <Label Text="Name:" FontSize="Medium" />
         <Label Text="{Binding Fly.FlyName}"  FontSize="Small" />
         <Label Text="Color:" FontSize="Medium" />
         <Label Text="{Binding Fly.Color}" FontSize="Small" />
-        <Label Text="Number of Catches:" FontSize="Medium" />
-        <Label Text="{Binding Fly.CatchNumbers}" FontSize="Small" />
         <Label Text="Description:" FontSize="Medium" />
         <Label Text="{Binding Fly.Description}" FontSize="Small" />
 
@@ -38,5 +36,11 @@
             <Label Text="{Binding Streamer.WaterColumn}" FontSize="Small" />
         </StackLayout>
 
+        <Image BackgroundColor="Blue"             
+          Source="{Binding Fly.ImagePath}"
+          HorizontalOptions="FillAndExpand" />
+
+
     </StackLayout>
+    </ScrollView>
 </ContentPage>
